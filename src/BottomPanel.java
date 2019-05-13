@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 public class BottomPanel extends GamePanel {
 	
 	private JButton n0, n1, n2, n3, n4, n5, n6, n7, n8, n9;
+	private int userAns;
 	
 	public BottomPanel(String player)
 	{
@@ -67,6 +68,8 @@ public class BottomPanel extends GamePanel {
 		n9.addActionListener(this);
 		n9.setPreferredSize(new java.awt.Dimension(80, 100));
 		contentPanel.add(n9);
+		
+		setUserAns(-1);
 	}
 
 	@Override
@@ -76,43 +79,51 @@ public class BottomPanel extends GamePanel {
 		
 		if (source == n0)
 		{
-			JOptionPane.showMessageDialog(null, "0");
+			setUserAns(0);
 		}
 		else if (source == n1)
 		{
-			JOptionPane.showMessageDialog(null, "1");
+			setUserAns(1);
 		}
 		else if (source == n2)
 		{
-			JOptionPane.showMessageDialog(null, "2");
+			setUserAns(2);
 		}
 		else if (source == n3)
 		{
-			JOptionPane.showMessageDialog(null, "3");
+			setUserAns(3);
 		}
 		else if (source == n4)
 		{
-			JOptionPane.showMessageDialog(null, "4");
+			setUserAns(4);
 		}
 		else if (source == n5)
 		{
-			JOptionPane.showMessageDialog(null, "5");
+			setUserAns(5);
 		}
 		else if (source == n6)
 		{
-			JOptionPane.showMessageDialog(null, "6");
+			setUserAns(6);
 		}
 		else if (source == n7)
 		{
-			JOptionPane.showMessageDialog(null, "7");
+			setUserAns(7);
 		}
 		else if (source == n8)
 		{
-			JOptionPane.showMessageDialog(null, "8");
+			setUserAns(8);
 		}
 		else if (source == n9)
 		{
-			JOptionPane.showMessageDialog(null, "9");
+			setUserAns(9);
 		}
+	}
+
+	public int getUserAns() {
+		return userAns;
+	}
+
+	public void setUserAns(int userAns) {
+		this.userAns = userAns;
 	}
 }

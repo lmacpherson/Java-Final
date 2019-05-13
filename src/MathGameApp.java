@@ -4,9 +4,10 @@ public class MathGameApp {
 
 	public static void main(String[] args) {
 		
-		JFrame frame = new GameFrame();
-		frame.setVisible(true);
+		GameFrame frame = new GameFrame();
 		
+		frame.setVisible(true);
+		frame.gameloop();
 	}
 
 }
