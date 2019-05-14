@@ -7,21 +7,19 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class GameFrame extends JFrame {
 	
-	String player;
 	TopPanel tPanel;
 	CenterPanel cPanel;
 	BottomPanel bPanel;
 	
 	public GameFrame()
 	{
-		player = JOptionPane.showInputDialog(null,"Enter your name: ");
-		setTitle("Welcome "+ player +", play math learning game");
+		setTitle("Welcome to play math learning game");
 		setSize(900,500);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		tPanel = new TopPanel(player);
-		cPanel = new CenterPanel(player);
-		bPanel = new BottomPanel(player);
+		tPanel = new TopPanel();
+		cPanel = new CenterPanel();
+		bPanel = new BottomPanel();
 	
 		this.add(tPanel, BorderLayout.NORTH);
 		this.add(cPanel, BorderLayout.CENTER);
@@ -33,7 +31,11 @@ public class GameFrame extends JFrame {
 		while (true)
 		{
 			System.out.println(tPanel.getStartFlag());
-			
+			if (tPanel.getStartFlag() == true)
+			{
+				String player = JOptionPane.showInputDialog(null,"Enter your name: ");
+				tPanel.addPlayer(player);
+			}
 			while(tPanel.getStartFlag())
 			{
 				// End game in round 10

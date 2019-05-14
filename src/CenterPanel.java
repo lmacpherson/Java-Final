@@ -12,9 +12,9 @@ public class CenterPanel extends GamePanel {
 	int [] qNum = new int[3];
 	int randomNumIndex;
 	
-	public CenterPanel(String player)
+	public CenterPanel()
 	{
-		super(player);
+		super();
 		
 		contentPanel.setBackground(Color.white);
 		contentPanel.setLayout(null);

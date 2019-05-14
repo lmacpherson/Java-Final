@@ -2,6 +2,10 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -23,10 +27,13 @@ public class TopPanel extends GamePanel {
 	private JLabel curRound;
 	private int score = 0;
 	private JLabel curScore;
+
+	private String player;
+	private List<PlayerInfo> scoreBoard;
 	
-	public TopPanel(String player) {
+	public TopPanel() {
 		
-		super(player);
+		super();
 		
 		contentPanel.setBackground(Color.red);
 		contentPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -53,6 +60,8 @@ public class TopPanel extends GamePanel {
 		curRound = new JLabel(" Round: " + Integer.toString(score));
 		curRound.setFont(new Font("Serif", Font.PLAIN, 48));
 		contentPanel.add(curRound);
+		
+		scoreBoard = new ArrayList<PlayerInfo>();
 	}
 
 	@Override
@@ -73,11 +82,71 @@ public class TopPanel extends GamePanel {
 		}
 		else if (source == scoreButton)
 		{
-			JOptionPane.showMessageDialog(null, "ScoreBoard");
+			showScoreBoard();
 		}
-		
 	}
 
+	// ScoreBoard method
+	public void addPlayer(String playerName)
+	{		
+		while (isInvalidName(playerName) == true)
+		{
+			JOptionPane.showMessageDialog(null, playerName + " Not accept this name...");
+			playerName = JOptionPane.showInputDialog(null,"Enter your name: ");
+		}
+		this.player = playerName;
+		scoreBoard.add(new PlayerInfo(playerName, 0));
+	}
+	
+	public void updateScore()
+	{	
+		Iterator<PlayerInfo> itr = scoreBoard.iterator();
+		while (itr.hasNext())
+        {
+			PlayerInfo i = itr.next();
+			String istr = i.getPlayerName();
+			
+            if (istr.equals(player))
+            {
+            	i.setPlayerScore(score);
+            	return ;
+            }
+        }
+	}
+	
+	public void showScoreBoard()
+	{
+		String msg = "";
+		
+		sortScoreBoard();
+		Iterator<PlayerInfo> itr = scoreBoard.iterator();
+		while (itr.hasNext())
+        { 
+			PlayerInfo i = itr.next(); 
+            msg += i.getPlayerName() + ": " + Integer.toString(i.getPlayerScore()) + "\n";
+        }
+		JOptionPane.showMessageDialog(null, msg);
+	}
+	
+	public void sortScoreBoard()
+	{
+		Collections.sort(scoreBoard, PlayerInfo.scoreComparator);
+	}
+	
+	private Boolean isInvalidName(String playerName)
+	{
+		Iterator<PlayerInfo> itr = scoreBoard.iterator();
+		while (itr.hasNext())
+        {
+			PlayerInfo i = itr.next();
+			String istr = i.getPlayerName();
+			
+            if (istr == null || istr.equals("") == true || istr.equals(playerName) == true)
+            	return true;
+        }
+		return false;
+	}
+	
 	//Score
 	public int getScore() {
 		return score;
@@ -92,6 +161,7 @@ public class TopPanel extends GamePanel {
 	{
 		this.score += 1;
 		curScore.setText(" Score: " + Integer.toString(score));
+		updateScore();
 	}
 	//round
 	public int getRound() {

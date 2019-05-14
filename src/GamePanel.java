@@ -6,12 +6,10 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public abstract class GamePanel extends JPanel implements ActionListener{
 	
-	String player;
 	JPanel contentPanel;
 	
-	public GamePanel(String player)
+	public GamePanel()
 	{
-		this.player = player;
 		this.setLayout(new BorderLayout());
 		contentPanel = new JPanel();
 		this.add(contentPanel);

@@ -12,9 +12,9 @@ public class BottomPanel extends GamePanel {
 	private JButton n0, n1, n2, n3, n4, n5, n6, n7, n8, n9;
 	private int userAns;
 	
-	public BottomPanel(String player)
+	public BottomPanel()
 	{
-		super(player);
+		super();
 		
 		contentPanel.setBackground(Color.blue);
 		contentPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
