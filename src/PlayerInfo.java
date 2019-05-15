@@ -1,3 +1,10 @@
+/**
+ * @author Juo-Wei, Bansi, Lauran
+ * Java Programming
+ * CS170-01
+ * Final Project
+ */
+
 import java.util.Comparator;
 
 public class PlayerInfo {

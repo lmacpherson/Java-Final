@@ -1,3 +1,10 @@
+/**
+ * @author Juo-Wei, Bansi, Lauran
+ * Java Programming
+ * CS170-01
+ * Final Project
+ */
+
 import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 

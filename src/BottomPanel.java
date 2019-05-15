@@ -1,10 +1,16 @@
+/**
+ * @author Juo-Wei, Bansi, Lauran
+ * Java Programming
+ * CS170-01
+ * Final Project
+ */
+
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 
 @SuppressWarnings("serial")
 public class BottomPanel extends GamePanel {

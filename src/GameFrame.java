@@ -1,8 +1,17 @@
-import java.awt.BorderLayout;
+/**
+ * @author Juo-Wei, Bansi, Lauran
+ * Java Programming
+ * CS170-01
+ * Final Project
+ */
 
+import java.awt.BorderLayout;
+import java.io.IOException;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class GameFrame extends JFrame {
@@ -10,8 +19,9 @@ public class GameFrame extends JFrame {
 	TopPanel tPanel;
 	CenterPanel cPanel;
 	BottomPanel bPanel;
+	AudioPlayer bgmPlayer, correctPlayer, wrongPlayer;
 	
-	public GameFrame()
+	public GameFrame() throws UnsupportedAudioFileException, IOException, LineUnavailableException
 	{
 		setTitle("Welcome to play math learning game");
 		setSize(900,500);
@@ -24,10 +34,17 @@ public class GameFrame extends JFrame {
 		this.add(tPanel, BorderLayout.NORTH);
 		this.add(cPanel, BorderLayout.CENTER);
 		this.add(bPanel, BorderLayout.SOUTH);
+		
+		bgmPlayer = new AudioPlayer("audio/bgm1.wav");
+		correctPlayer = new AudioPlayer("audio/correct.wav");
+		wrongPlayer = new AudioPlayer("audio/wrong.wav");
 	}
 	
-	public void gameloop()
+	public void gameloop() throws UnsupportedAudioFileException, IOException, LineUnavailableException
 	{
+		
+		bgmPlayer.play();
+		
 		while (true)
 		{
 			System.out.println(tPanel.getStartFlag());
@@ -59,11 +76,17 @@ public class GameFrame extends JFrame {
 					{
 						if (cPanel.checkUserAns(bPanel.getUserAns()) == true)
 						{
-							JOptionPane.showMessageDialog(null, "Correct :D");
 							tPanel.addScore();
+							correctPlayer.play();
+							correctPlayer.resetAudioStream();
+							JOptionPane.showMessageDialog(null, "Correct :D");
 						}
 						else
+						{
+							wrongPlayer.play();
+							wrongPlayer.resetAudioStream();
 							JOptionPane.showMessageDialog(null, "Wrong :(");
+						}
 						//reset
 						bPanel.setUserAns(-1);
 						tPanel.setPauseFlag(false);
